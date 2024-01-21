@@ -11,7 +11,6 @@ use App\Models\Country;
  */
 class CountryRepository
 {
-
 	/**
 	 * @param int $id
 	 * @return Country
