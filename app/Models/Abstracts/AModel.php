@@ -2,8 +2,12 @@
 
 namespace App\Models\Abstracts;
 
+use App\Traits\Parameters\WithCreatedAt;
+use App\Traits\Parameters\WithId;
+use App\Traits\Parameters\WithUpdatedAt;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Class AModel
@@ -15,46 +19,10 @@ use Illuminate\Database\Eloquent\Model;
  */
 class AModel extends Model
 {
+	use SoftDeletes, WithId, WithCreatedAt, WithUpdatedAt;
+
 	/*** @var string[] */
 	protected $dates = ['created_at', 'updated_at', 'deleted_at'];
-
-	/*** @return int */
-	public function getId(): int
-	{
-		return $this->id;
-	}
-
-	/**
-	 * @param int $id
-	 */
-	public function setId(int $id): void
-	{
-		$this->id = $id;
-	}
-
-	/*** @return Carbon */
-	public function getCreatedAt(): Carbon
-	{
-		return $this->created_at;
-	}
-
-	/*** @param Carbon $createdAt */
-	public function setCreatedAt(Carbon $createdAt): void
-	{
-		$this->created_at = $createdAt;
-	}
-
-	/*** @return Carbon */
-	public function getUpdatedAt(): Carbon
-	{
-		return $this->updated_at;
-	}
-
-	/*** @param Carbon $updatedAt */
-	public function setUpdatedAt(Carbon $updatedAt): void
-	{
-		$this->updated_at = $updatedAt;
-	}
 
 	/*** @return Carbon|NULL */
 	public function getDeletedAt(): ?Carbon

@@ -2,6 +2,7 @@
 
 namespace App\Models\Controllers;
 
+use App\Exceptions\Country\CountryNotFoundException;
 use App\Exceptions\NetworkProvider\NetworkProviderNotFoundException;
 use App\Models\NetworkProvider;
 use App\Models\Repositories\NetworkProviderRepository;
@@ -42,5 +43,15 @@ class NetworkProviderController
 	public function findByCountryId(int $countryId): NetworkProvider
 	{
 		return $this->repo->findByCountryId($countryId);
+	}
+
+	/**
+	 * @param string $countryCode
+	 * @return array
+	 * @throws CountryNotFoundException
+	 */
+	public function fetchAllListForCountryByCode(string $countryCode): array
+	{
+		return $this->repo->fetchAllListForCountryByCode($countryCode);
 	}
 }

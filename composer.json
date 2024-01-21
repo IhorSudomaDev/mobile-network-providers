@@ -10,7 +10,7 @@
 			"email": "sigord.hunter@gmail.com"
 		}
 	],
-	"version":           "0.0.3",
+	"version":           "0.0.4",
 	"require":           {
 		"php":                    "^7.4|^8.0",
 		"fruitcake/laravel-cors": "^2.0",
@@ -21,19 +21,23 @@
 	},
 	"require-dev":       {
 		"barryvdh/laravel-ide-helper": "^2.9",
-		"facade/ignition": "^2.5",
-		"fakerphp/faker": "^1.9.1",
-		"laravel/sail": "^1.0.1",
-		"mockery/mockery": "^1.4.4",
-		"nunomaduro/collision": "^5.10",
-		"phpunit/phpunit": "^9.5.10"
+		"facade/ignition":             "^2.5",
+		"fakerphp/faker":              "^1.9.1",
+		"laravel/sail":                "^1.0.1",
+		"mockery/mockery":             "^1.4.4",
+		"nunomaduro/collision":        "^5.10",
+		"phpunit/phpunit":             "^9.5.10"
 	},
 	"autoload":          {
 		"psr-4": {
 			"App\\":                 "app/",
 			"Database\\Factories\\": "database/factories/",
 			"Database\\Seeders\\":   "database/seeders/"
-		}
+		},
+		"files": [
+			"app/Support/controllers.php",
+			"app/Support/helpers.php"
+		]
 	},
 	"autoload-dev":      {
 		"psr-4": {

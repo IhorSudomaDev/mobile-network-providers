@@ -2,8 +2,10 @@
 
 namespace App\Models\Repositories;
 
+use App\Exceptions\Country\CountryNotFoundException;
 use App\Exceptions\NetworkProvider\NetworkProviderNotFoundException;
 use App\Models\NetworkProvider;
+use DB;
 
 /**
  * Class NetworkProviderRepository
@@ -38,4 +40,31 @@ class NetworkProviderRepository
 		}
 		return $country;
 	}
+
+	/**
+	 * @param string $countryCode
+	 * @return array
+	 * @throws CountryNotFoundException
+	 */
+	public function fetchAllListForCountryByCode(string $countryCode): array
+	{
+		$countryId = countryController()->findByCode($countryCode)->getId();
+		$query     = DB::table('network_providers as t1')
+			->select(
+				[
+					't1.id as id',
+					DB::raw(
+						"IF(
+						t1.title = '',
+						IF(t1.operator = '', t1.mnc, CONCAT(t1.mnc, ' - ', ' [', t1.operator, ']')),
+						IF(t1.operator = '', CONCAT(t1.mnc, ' - ', t1.title), CONCAT(t1.mnc, ' - ', t1.title, ' [', t1.operator, ']'))
+						) as 'name'"
+					),
+				]
+			)
+			->where('country_id', '=', $countryId)
+			->whereNull('deleted_at');
+		return $query->pluck('name', 'id')->toArray();
+	}
+
 }
