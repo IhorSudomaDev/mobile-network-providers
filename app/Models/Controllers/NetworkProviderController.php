@@ -46,12 +46,12 @@ class NetworkProviderController
 	}
 
 	/**
-	 * @param string $countryCode
+	 * @param string|NULL $countryCode
 	 * @return array
 	 * @throws CountryNotFoundException
 	 */
-	public function fetchAllListForCountryByCode(string $countryCode): array
+	public function fetchAllListFor(?string $countryCode = NULL): array
 	{
-		return $this->repo->fetchAllListForCountryByCode($countryCode);
+		return $this->repo->fetchAllListFor($countryCode);
 	}
 }

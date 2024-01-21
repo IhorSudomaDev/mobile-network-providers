@@ -42,29 +42,29 @@ class NetworkProviderRepository
 	}
 
 	/**
-	 * @param string $countryCode
+	 * @param string|null $countryCode
 	 * @return array
 	 * @throws CountryNotFoundException
 	 */
-	public function fetchAllListForCountryByCode(string $countryCode): array
+	public function fetchAllListFor(?string $countryCode = NULL): array
 	{
-		$countryId = countryController()->findByCode($countryCode)->getId();
-		$query     = DB::table('network_providers as t1')
+		$query = DB::table('network_providers as t1')
 			->select(
 				[
 					't1.id as id',
 					DB::raw(
 						"IF(
 						t1.title = '',
-						IF(t1.operator = '', t1.mnc, CONCAT(t1.mnc, ' - ', ' [', t1.operator, ']')),
-						IF(t1.operator = '', CONCAT(t1.mnc, ' - ', t1.title), CONCAT(t1.mnc, ' - ', t1.title, ' [', t1.operator, ']'))
+						IF(t1.operator = '', CONCAT('[', t1.mnc, ']'), CONCAT('( ', t1.operator, ' )', ' [', t1.mnc, ']')),
+						IF(t1.operator = '', CONCAT(t1.title, ' [', t1.mnc, ']'), CONCAT(t1.title, ' ( ', t1.operator, ' )', ' [', t1.mnc, ']'))
 						) as 'name'"
 					),
 				]
-			)
-			->where('country_id', '=', $countryId)
-			->whereNull('deleted_at');
-		return $query->pluck('name', 'id')->toArray();
+			);
+		if ($countryCode !== NULL) {
+			$query->where('country_id', '=', countryController()->findByCode($countryCode)->getId());
+		}
+		$query->whereNull('deleted_at');
+		return $query->orderBy('name')->pluck('name', 'id')->toArray();
 	}
-
 }
