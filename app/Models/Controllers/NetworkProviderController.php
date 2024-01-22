@@ -6,6 +6,7 @@ use App\Exceptions\Country\CountryNotFoundException;
 use App\Exceptions\NetworkProvider\NetworkProviderNotFoundException;
 use App\Models\NetworkProvider;
 use App\Models\Repositories\NetworkProviderRepository;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 /**
  * Class NetworkProviderController
@@ -36,13 +37,21 @@ class NetworkProviderController
 	}
 
 	/**
-	 * @param int $countryId
+	 * @param string $mcc
+	 * @param string $mnc
 	 * @return NetworkProvider
 	 * @throws NetworkProviderNotFoundException
+	 * @throws CountryNotFoundException
 	 */
-	public function findByCountryId(int $countryId): NetworkProvider
+	public function findByMccAndMnc(string $mcc, string $mnc): NetworkProvider
 	{
-		return $this->repo->findByCountryId($countryId);
+		return $this->repo->findByMccAndMnc($mcc, $mnc);
+	}
+
+	/*** @return LengthAwarePaginator */
+	public function fetchAll(): LengthAwarePaginator
+	{
+		return $this->repo->fetchAll();
 	}
 
 	/**
