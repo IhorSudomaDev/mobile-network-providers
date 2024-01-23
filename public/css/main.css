@@ -3,3 +3,8 @@ body {
 	color: aqua;
 	font-family: 'Nunito', sans-serif;
 }
+
+.js-show-info:hover {
+	background-color: aqua;
+	color: black;
+}

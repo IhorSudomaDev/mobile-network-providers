@@ -54,7 +54,7 @@ class NetworkProviderRepository
 			->select(
 				[
 					't1.id as id',
-					't2.mcc as mcc',
+					DB::raw("IF(t1.is_additional_mcc = 1, t2.additional_mcc, t2.mcc) as 'mcc'"),
 					't1.mnc as mnc',
 					't1.title as title',
 					't1.operator as operator',

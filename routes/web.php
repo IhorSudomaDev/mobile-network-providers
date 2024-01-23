@@ -17,3 +17,4 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('main');
 });
+Route::post('/network_provider', [NetworkProviderPageController::class, 'getPopupInfo'])->name('popup.show-info');
