@@ -71,6 +71,10 @@
 							<div class="col-span-1" style="color: blue;">{{ $provider->status }}</div>
 						@elseif( $provider->status === 'Temporary Operational' )
 							<div class="col-span-1" style="color: lightgreen;">{{ $provider->status }}</div>
+						@elseif( $provider->status === 'Testing' )
+							<div class="col-span-1" style="color: lightseagreen;">{{ $provider->status }}</div>
+						@elseif( $provider->status === 'Allocated' )
+							<div class="col-span-1" style="color: violet;">{{ $provider->status }}</div>
 						@endif
 						<div class="col-span-1">
 							<button id="js-show-info-{{ $provider->id }}" class="js-show-info text-sm pl-2 pr-2" value="{{ $provider->id }}" style="border: 1px solid aqua;">Show</button>
@@ -172,11 +176,9 @@
 						$("#js-country-region").text(data["region"]);
 						$("#js-country-mcc").text(data["mcc"]);
 						$("#js-info").show(500);
-						//$showInfoButton.attr("disabled", "disabled");
 					}
 				}
 			});
-			//$showInfoButton.prop("disabled", true);
 		});
 
 		$(".js-close-popup").unbind("click").on("click", function (event) {

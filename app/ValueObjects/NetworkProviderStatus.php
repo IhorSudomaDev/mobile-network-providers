@@ -24,6 +24,12 @@ class NetworkProviderStatus
 	public const PLANNED = 7;
 	/*** @var int */
 	public const TEMPORARY_OPERATIONAL = 8;
+	/*** @var int */
+	public const BUILDING_NETWORK = 9;
+	/*** @var int */
+	public const TESTING = 10;
+	/*** @var int */
+	public const ALLOCATED = 11;
 
 	/*** @var string */
 	public const OPERATIONAL_VALUE = 'Operational';
@@ -43,6 +49,12 @@ class NetworkProviderStatus
 	public const PLANNED_VALUE = 'Planned';
 	/*** @var string */
 	public const TEMPORARY_OPERATIONAL_VALUE = 'Temporary Operational';
+	/*** @var string */
+	public const BUILDING_NETWORK_VALUE = 'Building Network';
+	/*** @var string */
+	public const TESTING_VALUE = 'Testing';
+	/*** @var string */
+	public const ALLOCATED_VALUE = 'Allocated';
 
 	/**
 	 * @param int $id
@@ -74,6 +86,15 @@ class NetworkProviderStatus
 				break;
 			case self::TEMPORARY_OPERATIONAL:
 				$status = 'Temporary Operational';
+				break;
+			case self::BUILDING_NETWORK:
+				$status = 'Building Network';
+				break;
+			case self::TESTING:
+				$status = 'Testing';
+				break;
+			case self::ALLOCATED:
+				$status = 'Allocated';
 				break;
 			default:
 				$status = 'Undefined ID';
@@ -112,6 +133,15 @@ class NetworkProviderStatus
 				break;
 			case self::TEMPORARY_OPERATIONAL_VALUE:
 				$status = self::TEMPORARY_OPERATIONAL;
+				break;
+			case self::BUILDING_NETWORK_VALUE:
+				$status = self::BUILDING_NETWORK;
+				break;
+			case self::TESTING_VALUE:
+				$status = self::TESTING;
+				break;
+			case self::ALLOCATED_VALUE:
+				$status = self::ALLOCATED;
 				break;
 			default:
 				$status = 0;

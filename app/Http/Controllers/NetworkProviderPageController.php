@@ -22,12 +22,12 @@ class NetworkProviderPageController extends Controller
 		$networkProviderId    = $request->get('network_provider_id');
 		$networkProvider      = networkProviderController()->findById($networkProviderId);
 		$country              = $networkProvider->country;
-		$data['mnc']          = $networkProvider->getMnc();
-		$data['title']        = $networkProvider->getTitle();
-		$data['operator']     = $networkProvider->getOperator();
+		$data['mnc']          = empty($networkProvider->getMnc()) ? '-' : $networkProvider->getMnc();
+		$data['title']        = empty($networkProvider->getTitle()) ? '-' : $networkProvider->getTitle();
+		$data['operator']     = empty($networkProvider->getOperator()) ? '-' : $networkProvider->getOperator();
 		$data['status']       = NetworkProviderStatus::getStatusFor($networkProvider->getStatus());
 		$data['country']      = $country->getTitle();
-		$data['country_code'] = $country->getCountryCode();
+		$data['country_code'] = empty($country->getCountryCode()) ? '-' : $country->getCountryCode();
 		$data['region']       = $country->getRegion();
 		$data['mcc']          = $country->getActualMcc($networkProvider);
 		$data['success']      = 1;
