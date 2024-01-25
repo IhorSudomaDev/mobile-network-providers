@@ -7,11 +7,11 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * Class Country
+ * @property int|NULL                       parent_country_id
  * @property string                         title
  * @property string                         mcc
- * @property string                         additional_mcc
- * @property string                         country_code
- * @property string                         additional_country_code
+ * @property string|NULL                    country_code
+ * @property string|NULL                    additional_country_code
  * @property string                         region
  * @property NetworkProvider[]|HasMany|NULL network_providers
  * @method static whereNull(string $string)
@@ -27,6 +27,18 @@ class Country extends AModel
 	public function networkProviders(): HasMany
 	{
 		return $this->hasMany(NetworkProvider::class, 'country_id', 'id');
+	}
+
+	/*** @return int|NULL */
+	public function getParentCountryId(): ?int
+	{
+		return $this->parent_country_id;
+	}
+
+	/*** @param int|NULL $parentCountryId */
+	public function setParentCountryId(?int $parentCountryId): void
+	{
+		$this->parent_country_id = $parentCountryId;
 	}
 
 	/*** @return string */
@@ -54,18 +66,6 @@ class Country extends AModel
 	}
 
 	/*** @return string */
-	public function getAdditionalMcc(): string
-	{
-		return $this->additional_mcc;
-	}
-
-	/*** @param string $additionalMcc */
-	public function setAdditionalMcc(string $additionalMcc): void
-	{
-		$this->additional_mcc = $additionalMcc;
-	}
-
-	/*** @return string */
 	public function getCountryCode(): string
 	{
 		return $this->country_code;
@@ -77,14 +77,14 @@ class Country extends AModel
 		$this->country_code = $countryCode;
 	}
 
-	/*** @return string */
-	public function getAdditionalCountryCode(): string
+	/*** @return string|NULL */
+	public function getAdditionalCountryCode(): ?string
 	{
 		return $this->additional_country_code;
 	}
 
-	/*** @param string $additionalCountryCode */
-	public function setAdditionalCountryCode(string $additionalCountryCode): void
+	/*** @param string|NULL $additionalCountryCode */
+	public function setAdditionalCountryCode(?string $additionalCountryCode): void
 	{
 		$this->additional_country_code = $additionalCountryCode;
 	}
@@ -99,18 +99,5 @@ class Country extends AModel
 	public function setRegion(string $region): void
 	{
 		$this->region = $region;
-	}
-
-	/**
-	 * @param NetworkProvider $networkProvider
-	 * @return string
-	 */
-	public function getActualMcc(NetworkProvider $networkProvider): string
-	{
-		$mcc = $this->getMcc();
-		if ($networkProvider->isIsAdditionalMcc()) {
-			$mcc = $this->getAdditionalMcc();
-		}
-		return $mcc;
 	}
 }

@@ -1,6 +1,7 @@
 <?php
 
 use App\Exceptions\Country\CountryNotFoundException;
+use App\Mediators\Wiki;
 
 if ( ! function_exists('getCountryNameByCode')) {
 	/**
@@ -11,5 +12,11 @@ if ( ! function_exists('getCountryNameByCode')) {
 	function getCountryNameByCode(string $countryCode): string
 	{
 		return countryController()->findByCode($countryCode)->getTitle();
+	}
+}
+if ( ! function_exists('wiki')) {
+	function wiki(): Wiki
+	{
+		return new Wiki();
 	}
 }

@@ -10,19 +10,24 @@
 			"email": "sigord.hunter@gmail.com"
 		}
 	],
-	"version":           "0.0.8",
+	"version":           "0.0.9",
 	"require":           {
-		"php": "^7.4|^8.0",
-		"ext-json": "*",
-		"fruitcake/laravel-cors": "^2.0",
-		"guzzlehttp/guzzle": "^7.0.1",
-		"laravel/framework": "^8.75",
-		"laravel/sanctum": "^2.11",
-		"laravel/tinker": "^2.5",
-		"phpoffice/phpspreadsheet": "^1.12"
+		"php":                      "^7.4|^8.0",
+		"ext-dom":                  "*",
+		"ext-json":                 "*",
+		"ext-simplexml":            "*",
+		"fruitcake/laravel-cors":   "^2.0",
+		"guzzlehttp/guzzle":        "^7.0.1",
+		"laravel/framework":        "^8.75",
+		"laravel/sanctum":          "^2.11",
+		"laravel/tinker":           "^2.5",
+		"maatwebsite/excel":        "^3.1",
+		"phpoffice/phpspreadsheet": "^1.12",
+		"voku/simple_html_dom":     "^4.8"
 	},
 	"require-dev":       {
-		"barryvdh/laravel-ide-helper": "^2.9",
+		"barryvdh/laravel-debugbar":   "^3.6",
+		"barryvdh/laravel-ide-helper": "^2.10",
 		"facade/ignition":             "^2.5",
 		"fakerphp/faker":              "^1.9.1",
 		"laravel/sail":                "^1.0.1",

@@ -50,11 +50,11 @@ class NetworkProviderRepository
 	{
 		$query = DB::table('network_providers as t1')
 			->join('countries as t2', 't1.country_id', '=', 't2.id')
-			->join('network_provider_statuses as t3', 't1.status', '=', 't3.id')
+			->join('network_provider_statuses as t3', 't1.status_id', '=', 't3.id')
 			->select(
 				[
 					't1.id as id',
-					DB::raw("IF(t1.is_additional_mcc = 1, t2.additional_mcc, t2.mcc) as 'mcc'"),
+					't2.mcc as mcc',
 					't1.mnc as mnc',
 					't1.title as title',
 					't1.operator as operator',
@@ -92,5 +92,25 @@ class NetworkProviderRepository
 		}
 		$query->whereNull('t1.deleted_at');
 		return $query->orderBy('name')->pluck('name', 'id')->toArray();
+	}
+
+	/*** @return array */
+	public function fetchForExport(): array
+	{
+		$query = DB::table('network_providers as t1')
+			->join('countries as t2', 't1.country_id', '=', 't2.id')
+			->join('network_provider_statuses as t3', 't1.status_id', '=', 't3.id')
+			->select(
+				[
+					't2.title as country',
+					't2.country_code',
+					't2.mcc as mcc',
+					't1.mnc as mnc',
+					't1.title as title',
+					't1.operator as operator',
+				]
+			);
+		$query->whereNull('t1.deleted_at');
+		return $query->orderBy('country')->get()->toArray();
 	}
 }

@@ -11,8 +11,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property string       mnc
  * @property string       title
  * @property string       operator
- * @property int          status
- * @property bool         is_additional_mcc
+ * @property int          status_id
  * @property Country|NULL country
  * @method static whereNull(string $string)
  * @method static where(string $string, string $string1, mixed $string2)
@@ -78,28 +77,14 @@ class NetworkProvider extends AModel
 	}
 
 	/*** @return int */
-	public function getStatus(): int
+	public function getStatusId(): int
 	{
-		return $this->status;
+		return $this->status_id;
 	}
 
-	/*** @param int $status */
-	public function setStatus(int $status): void
+	/*** @param int $statusId */
+	public function setStatusId(int $statusId): void
 	{
-		$this->status = $status;
-	}
-
-	/*** @return bool */
-	public function isIsAdditionalMcc(): bool
-	{
-		return $this->is_additional_mcc;
-	}
-
-	/**
-	 * @param bool $isAdditionalMcc
-	 */
-	public function setIsAdditionalMcc(bool $isAdditionalMcc): void
-	{
-		$this->is_additional_mcc = $isAdditionalMcc;
+		$this->status_id = $statusId;
 	}
 }

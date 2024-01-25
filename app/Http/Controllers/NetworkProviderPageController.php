@@ -25,11 +25,11 @@ class NetworkProviderPageController extends Controller
 		$data['mnc']          = empty($networkProvider->getMnc()) ? '-' : $networkProvider->getMnc();
 		$data['title']        = empty($networkProvider->getTitle()) ? '-' : $networkProvider->getTitle();
 		$data['operator']     = empty($networkProvider->getOperator()) ? '-' : $networkProvider->getOperator();
-		$data['status']       = NetworkProviderStatus::getStatusFor($networkProvider->getStatus());
+		$data['status']       = NetworkProviderStatus::getStatusFor($networkProvider->getStatusId());
 		$data['country']      = $country->getTitle();
 		$data['country_code'] = empty($country->getCountryCode()) ? '-' : $country->getCountryCode();
 		$data['region']       = $country->getRegion();
-		$data['mcc']          = $country->getActualMcc($networkProvider);
+		$data['mcc']          = $country->getMcc($networkProvider);
 		$data['success']      = 1;
 		return json_encode($data);
 	}

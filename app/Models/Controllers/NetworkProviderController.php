@@ -63,4 +63,10 @@ class NetworkProviderController
 	{
 		return $this->repo->fetchAllListFor($countryCode);
 	}
+
+	/*** @return array */
+	public function fetchForExport(): array
+	{
+		return $this->repo->fetchForExport();
+	}
 }

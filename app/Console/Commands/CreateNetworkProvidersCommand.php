@@ -52,7 +52,7 @@ class CreateNetworkProvidersCommand extends Command
 			$networkProvider->setMnc($provider[1]);
 			$networkProvider->setTitle($provider[2] === NULL ? '' : $provider[2]);
 			$networkProvider->setOperator($provider[3] === NULL ? '' : $provider[3]);
-			$networkProvider->setStatus(NetworkProviderStatus::getStatusIdFor($provider[4]));
+			$networkProvider->setStatusId(NetworkProviderStatus::getStatusIdFor($provider[4]));
 			$networkProvider->save();
 		}
 	}
